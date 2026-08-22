@@ -1,0 +1,15 @@
+{
+  "family": "matter_radiation_exchange",
+  "geometry": "rcyl",
+  "title": "RCYL radiation-matter equilibration",
+  "electron_density_m3": 1.0e24,
+  "initial_electron_temperature_eV": 10.0,
+  "planck_alpha_m_inv": 1000.0,
+  "gamma": 1.6666666666666667,
+  "dt_s": 4.0e-13,
+  "steps": 50,
+  "domain_lo_m": [0.0],
+  "domain_hi_m": [0.01],
+  "cells": [256],
+  "active_region_m": [0.0025, 0.0075]
+}

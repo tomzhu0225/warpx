@@ -1,0 +1,14 @@
+{
+  "analytic_deposited_energy_J": 1016.0476814249511,
+  "analytic_final_photon_energy_J": 141.78392276787363,
+  "case": "2d_searchlight_beer_lambert",
+  "family": "beer_lambert",
+  "geometry": "2d",
+  "initial_photon_energy_J": 1157.8316041928247,
+  "passed": true,
+  "relative_deposition_error": 1.1189124270445308e-16,
+  "relative_energy_ledger_error": 1.9637888154015648e-16,
+  "relative_transmission_error": 0.0,
+  "simulated_deposited_energy_J": 1016.0476814249512,
+  "simulated_final_photon_energy_J": 141.78392276787363
+}

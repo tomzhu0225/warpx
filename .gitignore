@@ -1,0 +1,5 @@
+*/results/raw/
+*/results/run.log
+*/Backtrace.*.*
+*/warpx_used_inputs
+__pycache__/

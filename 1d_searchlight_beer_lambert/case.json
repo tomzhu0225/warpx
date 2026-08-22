@@ -1,0 +1,12 @@
+{
+  "family": "beer_lambert",
+  "geometry": "1d",
+  "title": "Planar 1-D Beer-Lambert searchlight",
+  "alpha_m_inv": 3.0,
+  "path_length_m": 0.7,
+  "start_m": [0.1],
+  "direction": [1.0],
+  "domain_lo_m": [0.0],
+  "domain_hi_m": [1.0],
+  "cells": [64]
+}

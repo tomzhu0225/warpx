@@ -1,0 +1,14 @@
+{
+  "analytic_deposited_energy_J": 718.454205544452,
+  "analytic_final_photon_energy_J": 100.25637325239319,
+  "case": "rcyl_radial_beer_lambert",
+  "family": "beer_lambert",
+  "geometry": "rcyl",
+  "initial_photon_energy_J": 818.7105787968451,
+  "passed": true,
+  "relative_deposition_error": 0.0,
+  "relative_energy_ledger_error": 0.0,
+  "relative_transmission_error": 0.0,
+  "simulated_deposited_energy_J": 718.454205544452,
+  "simulated_final_photon_energy_J": 100.25637325239319
+}

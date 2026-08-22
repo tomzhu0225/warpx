@@ -1,0 +1,17 @@
+{
+  "analytic_final_electron_temperature_eV": 9.529601783102777,
+  "analytic_final_radiation_energy_J": 11.304915476819936,
+  "case": "2d_matter_radiation_exchange",
+  "family": "matter_radiation_exchange",
+  "geometry": "2d",
+  "passed": true,
+  "relative_final_radiation_error": 6.447069696957565e-05,
+  "relative_final_temperature_error": 3.1823891036323027e-06,
+  "relative_history_Linf_error": 0.004527178383383664,
+  "relative_plotfile_current_exchange_error": 1.2311477099608775e-15,
+  "relative_reduced_diagnostic_conservation_error": 1.1785612462495769e-14,
+  "relative_spatial_nonuniformity": 4.2229404363973715e-15,
+  "simulated_final_electron_temperature_eV": 9.529632110003654,
+  "simulated_final_radiation_energy_J": 11.304186641039964,
+  "total_volume_m3_per_suppressed_length": 0.00010000000000000003
+}
