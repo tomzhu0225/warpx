@@ -12,8 +12,8 @@ results and initial/final/comparison plots.
 
 ## Validated results
 
-All six cases pass in a clean run with the double-precision public radiation
-branch at WarpX commit `8f4c0b35b`. The compact JSON and CSV files contain the
+All six cases pass in a clean run with the double-precision packed radiation
+branch at WarpX commit `dedc0aba6`. The compact JSON and CSV files contain the
 full-precision values; the principal acceptance metrics are:
 
 | Case | Main analytic error | Energy-ledger error |
