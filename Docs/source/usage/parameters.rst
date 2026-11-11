@@ -1097,6 +1097,12 @@ Setting up the field mesh
     An earlier guarded checkpoint can be continued with this option when every
     particle stencil is still completely inside the fine slab.
 
+    Charge balance in the geometric Yee dual cells through the axis uses
+    :pp:param:`boundary.verboncoeur_axis_correction` set to ``0`` on both
+    the refined mesh and its uniform reference. This assigns the axial current
+    and charge at :math:`r=0` the dual area :math:`\pi\Delta r^2/4`.
+    The default density correction uses :math:`\pi\Delta r^2/3` at that node.
+
 
 .. pp:param:: warpx.ref_patch_function(x,y,z)
     :type: ``string``
