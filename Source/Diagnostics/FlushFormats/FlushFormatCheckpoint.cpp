@@ -2,6 +2,7 @@
 #   include "FieldSolver/RadialParticleCoupling.H"
 #endif
 #include "FlushFormatCheckpoint.H"
+#include "HostRandomState.H"
 
 #include "BoundaryConditions/PML.H"
 #include "FieldSolver/CompositeYeeSurface.H"
@@ -211,6 +212,7 @@ FlushFormatCheckpoint::WriteToFile (
     WriteDMaps(checkpointname, nlev);
 
     WriteReducedDiagsData(checkpointname);
+    warpx::checkpoint::write_host_random_state(checkpointname);
 
     VisMF::SetHeaderVersion(current_version);
 

@@ -21,6 +21,7 @@
 #if (defined WARPX_DIM_RZ) && (defined WARPX_USE_FFT)
 #   include "BoundaryConditions/PML_RZ.H"
 #endif
+#include "Diagnostics/FlushFormats/HostRandomState.H"
 #include "Diagnostics/MultiDiagnostics.H"
 #include "Diagnostics/ReducedDiags/MultiReducedDiags.H"
 #include "EmbeddedBoundary/Enabled.H"
@@ -985,6 +986,7 @@ WarpX::InitData ()
         WarpX::ProjectionCleanDivB();
     }
 
+    warpx::checkpoint::restore_host_random_state(restart_chkfile, istep[0]);
     if (restart_chkfile.empty())
     {
         ExecutePythonCallback("beforeInitEsolve");
