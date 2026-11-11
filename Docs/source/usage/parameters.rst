@@ -1056,6 +1056,13 @@ Setting up the field mesh
     A fixed-shape checkpoint records the particle shape and filter. A checkpoint
     from the guarded radial interface can enable this option when every kinetic
     stencil is still contained in the fine bore.
+
+    Charge balance in the geometric Yee dual cells through the axis uses
+    :pp:param:`boundary.verboncoeur_axis_correction` set to ``0`` on both
+    the refined mesh and its uniform reference. This assigns the axial current
+    and charge at :math:`r=0` the dual area :math:`\pi\Delta r^2/4`.
+    The default density correction uses :math:`\pi\Delta r^2/3` at that node.
+
 .. pp:param:: warpx.composite_xz_interface
     :type: ``bool``
     :default: ``0``
@@ -1098,12 +1105,6 @@ Setting up the field mesh
     At an outer PML boundary, particle stencils must stay in the physical domain.
     An earlier guarded checkpoint can be continued with this option when every
     particle stencil is still completely inside the fine slab.
-
-    Charge balance in the geometric Yee dual cells through the axis uses
-    :pp:param:`boundary.verboncoeur_axis_correction` set to ``0`` on both
-    the refined mesh and its uniform reference. This assigns the axial current
-    and charge at :math:`r=0` the dual area :math:`\pi\Delta r^2/4`.
-    The default density correction uses :math:`\pi\Delta r^2/3` at that node.
 
 
 .. pp:param:: warpx.ref_patch_function(x,y,z)
