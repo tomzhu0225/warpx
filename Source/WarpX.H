@@ -722,6 +722,23 @@ public:
     void FillRadialInterfaceGatherGuards ();
 #endif
 
+    // Two-sided Yee update for a full-length XZ refinement slab.
+    void WriteCompositeXZCheckpoint (std::string const& directory) const;
+    //! Validate the field layout and return whether the restored particles need a fine-stencil check.
+    [[nodiscard]] bool CheckCompositeXZCheckpoint (std::string const& directory);
+    void InitCompositeXZInterface ();
+    void PrepareCompositeXZInterface ();
+    void ApplyCompositeXZInterface (amrex::Real a_dt);
+    void SynchronizeCompositeXZMagneticTrace ();
+    void MaskCompositeXZCoveredFields ();
+    void CheckCompositeXZParticles (bool require_fine = false);
+#ifdef WARPX_DIM_XZ
+    [[nodiscard]] bool UsesCompositeXZFixedShape () const { return m_composite_xz_fixed_shape; }
+    void InitCompositeXZParticleCoupling ();
+    void AssembleCompositeXZCurrent (amrex::Real a_dt);
+    void UpdateCompositeXZGather ();
+#endif
+
     // Fill boundary cells including coarse/fine boundaries
     void FillBoundaryB   (amrex::IntVect ng, std::optional<bool> nodal_sync = std::nullopt);
     void FillBoundaryE   (amrex::IntVect ng, std::optional<bool> nodal_sync = std::nullopt);
@@ -1220,6 +1237,12 @@ protected:
     void ClearLevel (int lev) final;
 
 private:
+    bool m_composite_xz_interface = false;
+    bool m_composite_xz_fixed_shape = false;
+    amrex::Gpu::DeviceVector<amrex::Real> m_composite_xz_inverse_y;
+    amrex::Gpu::DeviceVector<amrex::Real> m_composite_xz_boundary;
+    amrex::Gpu::DeviceVector<amrex::Real> m_composite_xz_rhs;
+
 
     /**
      * \brief

@@ -6,6 +6,8 @@ foreach(D IN LISTS WarpX_DIMS)
         CompositeYeeSurface.cpp
         FixedShapeCurrent.cpp
         CurrentControlledPort.cpp
+        CompositeXZInterface.cpp
+        CompositeXZParticles.cpp
         WarpXPushFieldsEM.cpp
         WarpXPushFieldsHybridPIC.cpp
         WarpX_QED_Field_Pushers.cpp

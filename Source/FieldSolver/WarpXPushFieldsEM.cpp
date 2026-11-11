@@ -957,11 +957,14 @@ WarpX::EvolveB (amrex::Real a_dt, SubcyclingHalf subcycling_half,
                 apply_current_controlled_port);
     }
 
+    SynchronizeCompositeXZMagneticTrace();
+
     // Allow execution of Python callback after B-field push
     if (apply_current_controlled_port) {
         ApplyCompositeCurrentControlledPorts(start_time + a_dt);
     }
     if (m_composite_yee_surface) { m_composite_yee_surface->RestrictMagnetic(); }
+    MaskCompositeXZCoveredFields();
     ExecutePythonCallback("afterBpush");
 }
 
@@ -973,7 +976,7 @@ WarpX::EvolveB (int lev, amrex::Real a_dt, SubcyclingHalf subcycling_half,
     ABLASTR_PROFILE("WarpX::EvolveB()");
     EvolveB(lev, PatchType::fine, a_dt, subcycling_half, start_time,
             apply_current_controlled_port);
-    if (lev > 0)
+    if (lev > 0 && !m_composite_xz_interface)
     {
         EvolveB(lev, PatchType::coarse, a_dt, subcycling_half, start_time,
                 apply_current_controlled_port);
@@ -1028,6 +1031,7 @@ WarpX::EvolveE (amrex::Real a_dt, amrex::Real start_time)
 
     // Allow execution of Python callback after E-field push
     if (m_composite_yee_surface) { m_composite_yee_surface->AdvanceElectric(a_dt); }
+    ApplyCompositeXZInterface(a_dt);
     ExecutePythonCallback("afterEpush");
 }
 
@@ -1036,7 +1040,7 @@ WarpX::EvolveE (int lev, amrex::Real a_dt, amrex::Real start_time)
 {
     ABLASTR_PROFILE("WarpX::EvolveE()");
     EvolveE(lev, PatchType::fine, a_dt, start_time);
-    if (lev > 0)
+    if (lev > 0 && !m_composite_xz_interface)
     {
         EvolveE(lev, PatchType::coarse, a_dt, start_time);
     }

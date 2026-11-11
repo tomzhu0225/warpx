@@ -6,6 +6,8 @@ ifeq ($(USE_RZ),TRUE)
   CEXE_sources += ConformingRadialInterface.cpp
   CEXE_sources += RadialParticleCoupling.cpp
 endif
+CEXE_sources += CompositeXZInterface.cpp
+CEXE_sources += CompositeXZParticles.cpp
 CEXE_sources += WarpXPushFieldsEM.cpp
 CEXE_sources += WarpXPushFieldsHybridPIC.cpp
 CEXE_sources += ElectrostaticSolver.cpp

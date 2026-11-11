@@ -809,6 +809,15 @@ void
 WarpX::InitData ()
 {
     ABLASTR_PROFILE("WarpX::InitData()");
+    amrex::ParmParse("warpx").query("composite_xz_interface", m_composite_xz_interface);
+    amrex::ParmParse("warpx").query("composite_xz_fixed_shape", m_composite_xz_fixed_shape);
+    WARPX_ALWAYS_ASSERT_WITH_MESSAGE(!m_composite_xz_fixed_shape || m_composite_xz_interface,
+        "The fixed-shape XZ particle coupling requires the conforming XZ interface.");
+#ifndef WARPX_DIM_XZ
+    WARPX_ALWAYS_ASSERT_WITH_MESSAGE(!m_composite_xz_interface,
+        "composite_xz_interface requires Cartesian XZ.");
+#endif
+
 
     using ablastr::fields::Direction;
     using warpx::fields::FieldType;
@@ -892,12 +901,14 @@ WarpX::InitData ()
         ::PrintDtDxDyDz(max_level, geom, dt);
         InitFromScratch();
         InitMacroscopicProperties();
+        InitCompositeXZInterface();
         InitDiagnostics();
     }
     else
     {
         InitFromCheckpoint();
         InitMacroscopicProperties();
+        InitCompositeXZInterface();
         ::PrintDtDxDyDz(max_level, geom, dt);
         for (auto& current_port : m_current_controlled_ports) {
             for (int lev = 0; lev <= finest_level; ++lev) {
@@ -1299,6 +1310,9 @@ WarpX::InitPML ()
             if (m_use_composite_yee_surface) {
                 WARPX_ALWAYS_ASSERT_WITH_MESSAGE(Geom(lev).Domain().strictly_contains(levelBox),
                     "The conforming Yee interface must lie inside the physical domain.");
+            }
+            if (m_use_composite_yee_surface || m_composite_xz_interface) {
+                // Each conforming interface owns the interior slab boundary.
                 do_pml_Lo[lev] = amrex::IntVect(0);
                 do_pml_Hi[lev] = amrex::IntVect(0);
             }
@@ -1317,7 +1331,7 @@ WarpX::InitPML ()
                 do_pml_Lo[lev], do_pml_Hi[lev],
                 // The conforming trace owns the entire interior interface, including
                 // concave steps that cannot be disabled with exterior face flags.
-                !m_use_composite_yee_surface);
+                !(m_use_composite_yee_surface || m_composite_xz_interface));
         }
     }
 }

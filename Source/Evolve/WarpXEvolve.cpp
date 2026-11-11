@@ -624,6 +624,9 @@ WarpX::OneStep_nosub (
     }
 #endif
     if (m_composite_yee_surface) { m_composite_yee_surface->AssembleParticleCurrent(a_dt); }
+#ifdef WARPX_DIM_XZ
+    if (m_composite_xz_fixed_shape) { AssembleCompositeXZCurrent(a_dt); }
+#endif
 
     // At this point, J is up-to-date inside the domain except with Vay deposition,
     // and E and B are up-to-date including enough guard cells for the first
@@ -634,6 +637,8 @@ WarpX::OneStep_nosub (
     if (do_pml && do_pml_j_damping) { DampJPML(); }
 
     ExecutePythonCallback("beforeEsolve");
+
+    PrepareCompositeXZInterface();
 
     // Push E and B from {n} to {n+1}
     // (And update guard cells immediately afterwards)
@@ -1537,6 +1542,9 @@ WarpX::PushParticlesandDeposit (
     ImplicitOptions const * implicit_options
 )
 {
+    // Check after all deposition/collision callbacks, immediately before gathering.
+    CheckCompositeXZParticles();
+
     // Evolve particles to p^{n+1/2} and x^{n+1}
     // Deposit current, j^{n+1/2}
     for (int lev = 0; lev <= finest_level; ++lev) {

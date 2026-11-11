@@ -80,6 +80,7 @@ FlushFormatCheckpoint::WriteToFile (
 
     WriteWarpXHeader(checkpointname, geom, /*is_checkpoint=*/true);
     CompositeYeeSurface::WriteCheckpointIdentity(warpx, checkpointname);
+    warpx.WriteCompositeXZCheckpoint(checkpointname);
 
 #ifdef WARPX_DIM_RZ
     if (warpx.usesConformingRadialInterface() && ParallelDescriptor::IOProcessor()) {

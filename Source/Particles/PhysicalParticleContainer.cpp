@@ -565,6 +565,8 @@ PhysicalParticleContainer::Evolve (ablastr::fields::MultiFabRegister& fields,
 #endif
 #ifdef WARPX_DIM_RZ
         !warpx::radial_particles::enabled(fields) &&
+#elif defined(WARPX_DIM_XZ)
+        !WarpX::GetInstance().UsesCompositeXZFixedShape() &&
 #endif
         !skip_deposition &&
         !do_not_deposit &&
