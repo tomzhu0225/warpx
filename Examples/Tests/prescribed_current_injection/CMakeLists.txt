@@ -69,6 +69,56 @@ add_warpx_test(
 )
 
 add_warpx_test(
+    test_2d_prescribed_current_straddling_uniform_picmi
+    2
+    1
+    "inputs_base_2d_antenna_plasma.py --across-interface"
+    OFF
+    OFF
+    OFF
+)
+
+add_warpx_test(
+    test_2d_prescribed_current_straddling_isotropic_picmi
+    2
+    1
+    "inputs_base_2d_antenna_plasma.py --slab 2 2 --across-interface"
+    OFF
+    OFF
+    OFF
+)
+
+add_warpx_test(
+    test_2d_prescribed_current_straddling_transverse_picmi
+    2
+    1
+    "inputs_base_2d_antenna_plasma.py --slab 2 1 --across-interface"
+    OFF
+    OFF
+    OFF
+)
+
+add_warpx_test(
+    test_2d_prescribed_current_straddling_tangential_picmi
+    2
+    1
+    "inputs_base_2d_antenna_plasma.py --slab 1 2 --across-interface"
+    OFF
+    OFF
+    OFF
+)
+
+add_warpx_test(
+    test_2d_prescribed_current_straddling_vacuum_picmi
+    2
+    1
+    "inputs_base_2d_antenna_plasma.py --slab 2 2 --no-plasma --across-interface"
+    OFF
+    OFF
+    OFF
+)
+
+add_warpx_test(
     test_3d_prescribed_current_injection  # name
     3  # dims
     1  # nprocs
